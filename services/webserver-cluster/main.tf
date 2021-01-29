@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    key = var.db_remote_state_key
+    key = var.wc_remote_state_key
     bucket = var.remote_state_bucket
     region = "us-east-2"
     dynamodb_table = "altocorp-terraform-locks"
