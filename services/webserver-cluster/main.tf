@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     key = var.db_remote_state_key
-    bucket = var.db_remote_state_bucket
+    bucket = var.remote_state_bucket
     region = "us-east-2"
     dynamodb_table = "altocorp-terraform-locks"
     encrypt = true
@@ -28,7 +28,7 @@ data "terraform_remote_state" "db" {
   backend = "s3"
 
   config = {
-    bucket = var.db_remote_state_bucket
+    bucket = var.remote_state_bucket
     region = "us-east-2"
     key = var.db_remote_state_key
   }
@@ -91,6 +91,17 @@ resource "aws_autoscaling_group" "example" {
     value = "${var.cluster_name}-auto-scaling-group"
     propagate_at_launch = true
   }
+
+  dynamic "tag" {
+    for_each = var.custom_tags
+
+    content {
+      key = tag.key
+      value = tag.value
+      propagate_at_launch = true
+    }
+  }
+
 }
 
 resource "aws_lb" "load_balancer" {
