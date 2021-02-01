@@ -1,13 +1,3 @@
-terraform {
-  backend "s3" {
-    key = var.wc_remote_state_key
-    bucket = var.remote_state_bucket
-    region = "us-east-2"
-    dynamodb_table = "altocorp-terraform-locks"
-    encrypt = true
-  }
-}
-
 locals {
   http_port = 80
   any_port = 0

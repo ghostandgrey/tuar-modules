@@ -19,10 +19,6 @@ variable "db_remote_state_key" {
   type = string
 }
 
-variable "wc_remote_state_key" {
-  description = "The path for the web cluster's remote state in S3"
-}
-
 variable "instance_type" {
   description = "The type of EC2 instances to run (e.g. 't2.micro')"
   type = string
